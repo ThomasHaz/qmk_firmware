@@ -34,6 +34,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    include "bluetooth.h"
 #    include "outputselect.h"
 #endif
+#ifdef RF_ENABLE
+#   include "rf.h"
+#   include "rf_outputselect.h"
+#endif
 
 #ifdef NKRO_ENABLE
 #    include "keycode_config.h"
@@ -79,6 +83,12 @@ void host_keyboard_send(report_keyboard_t *report) {
         return;
     }
 #endif
+#ifdef RF_ENABLE
+    if (where_to_send() == OUTPUT_RF) {
+        rf_send_keyboard(report);
+        return;
+    }
+#endif
 
     if (!driver) return;
 #ifdef KEYBOARD_SHARED_EP
@@ -113,6 +123,12 @@ void host_mouse_send(report_mouse_t *report) {
 #ifdef BLUETOOTH_ENABLE
     if (where_to_send() == OUTPUT_BLUETOOTH) {
         bluetooth_send_mouse(report);
+        return;
+    }
+#endif
+#ifdef RF_ENABLE
+    if (where_to_send() == OUTPUT_RF) {
+        rf_send_mouse(report);
         return;
     }
 #endif
@@ -152,7 +168,12 @@ void host_consumer_send(uint16_t usage) {
         return;
     }
 #endif
-
+#ifdef RF_ENABLE
+    if (where_to_send() == OUTPUT_RF) {
+        rf_send_consumer(usage);
+        return;
+    }
+#endif
     if (!driver) return;
 
     report_extra_t report = {

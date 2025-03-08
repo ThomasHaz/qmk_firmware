@@ -1,6 +1,13 @@
 // Copyright 2024 Nick Brassel (@tzarc)
 // SPDX-License-Identifier: GPL-2.0-or-later
+#ifndef RF_ENABLE
 #include "outputselect.h"
+#endif
+
+#ifdef RF_ENABLE
+#include "rf_outputselect.h"
+#endif
+
 #include "process_connection.h"
 
 bool process_connection(uint16_t keycode, keyrecord_t *record) {

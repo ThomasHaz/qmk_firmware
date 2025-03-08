@@ -34,6 +34,7 @@ uint32_t adafruit_ble_read_battery_voltage(void);
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        // TODO: RF
 #ifdef BLUETOOTH_ENABLE
         case KC_VBAT:
             if (record->event.pressed) {

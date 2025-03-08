@@ -21,7 +21,7 @@
 #include "report.h"
 
 /**
- * \brief Initialize the Bluetooth system.
+ * \brief Initialize the RF system.
  */
 void rf_init(void);
 

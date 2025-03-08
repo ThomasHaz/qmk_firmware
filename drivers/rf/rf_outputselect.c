@@ -12,7 +12,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "outputselect.h"
+#include "rf_outputselect.h"
 #include "usb_util.h"
 
 #ifdef RF_NRF24L01
@@ -52,7 +52,7 @@ uint8_t auto_detect_output(void) {
 #endif
 
 #ifdef RF_ENABLE
-    return OUTPUT_RF; // should check if BT is connected here
+    return OUTPUT_RF; // should check if RF is connected here
 #endif
 
     return OUTPUT_NONE;

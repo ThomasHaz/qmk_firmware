@@ -23,7 +23,9 @@
 #ifdef BLUETOOTH_ENABLE
 #    include "process_connection.h"
 #endif
-
+#ifdef RF_ENABLE
+#    include "process_connection.h"
+#endif
 #ifdef GRAVE_ESC_ENABLE
 #    include "process_grave_esc.h"
 #endif
@@ -437,6 +439,9 @@ bool process_record_quantum(keyrecord_t *record) {
             process_layer_lock(keycode, record) &&
 #endif
 #ifdef BLUETOOTH_ENABLE
+            process_connection(keycode, record) &&
+#endif
+#ifdef RF_ENABLE
             process_connection(keycode, record) &&
 #endif
             true)) {
